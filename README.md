@@ -1,13 +1,13 @@
-# ModBot
+# Moderate
 
-ModBot is a free open-source npm package with lot of cool commands and features
+Moderate is a free open-source npm package with lot of cool commands and features
 
 ## Installation
 
 You can download our package from doing below command.
 
 ```bash
-npm install modbot
+npm install moderate
 ```
 
 ## Commands
