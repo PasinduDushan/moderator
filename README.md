@@ -1,13 +1,13 @@
-# Moderate
+# Moderation
 
-Moderate is a free open-source npm package with lot of cool commands and features
+Moderation is a free open-source npm package with lot of cool commands and features
 
 ## Installation
 
 You can download our package from doing below command.
 
 ```bash
-npm install moderate
+npm install moderation
 ```
 
 ## Commands
