@@ -24,7 +24,7 @@ npm install moderation
 ## Usage
 
 ```bash
- const discord = require('modbot')
+ const discord = require('moderation')
 
  discord('Your Bot TOKEN', 'Your bot(s) prefix')
 ```
