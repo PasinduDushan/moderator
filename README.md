@@ -1,4 +1,4 @@
-# Moderator
+# ModBot
 
 Moderator is a free open-source npm package with lot of cool commands and features
 
@@ -7,7 +7,7 @@ Moderator is a free open-source npm package with lot of cool commands and featur
 You can download our package from doing below command.
 
 ```bash
-npm install moderator
+npm install modbot
 ```
 
 ## Commands
@@ -24,7 +24,7 @@ npm install moderator
 ## Usage
 
 ```bash
- const discord = require('moderator')
+ const discord = require('modbot')
 
  discord('Your Bot TOKEN', 'Your bot(s) prefix')
 ```
