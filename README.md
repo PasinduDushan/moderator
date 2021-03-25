@@ -1,6 +1,6 @@
 # ModBot
 
-Moderator is a free open-source npm package with lot of cool commands and features
+ModBot is a free open-source npm package with lot of cool commands and features
 
 ## Installation
 
