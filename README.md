@@ -15,10 +15,13 @@ npm install moderation
 ```bash
 <PREFIX>kick - Kick a member from the serer by mention
 <PREFIX>ban - Ban a member from the server by mention
-<PREFIX>mute - Mute a member
+<PREFIX>mute - Mute a member by mention
 <PREFIX>unmute - Unmute a member by mention
 <PREFIX>unban - Unban a member by ID
 <PREFIX>clear - Clears up to 99 messages
+<PREFIX>warn - Warn a member by mention
+<PREFIX>lockdown - Lockdown the current channel
+<PREFIX>release - Release lockdown in the current channel
 ```
 
 ## Usage
@@ -26,7 +29,7 @@ npm install moderation
 ```bash
  const discord = require('moderation')
 
- discord('Your Bot TOKEN', 'Your bot(s) prefix')
+ discord('Your Bot TOKEN', 'Your bot(s) prefix', 'Your prefered embed colour')
 ```
 
 ## Contributing
