@@ -1,4 +1,4 @@
-module.exports = function discord(token, PREFIX) {
+module.exports = function discord(token, PREFIX, Color) {
     const Discord = require('discord.js')
     const client = new Discord.Client()
 
@@ -8,6 +8,10 @@ module.exports = function discord(token, PREFIX) {
 
     if (PREFIX === undefined) {
             throw new TypeError('you must provide a prefix for your bot')
+    }
+
+    if(Color === undefined){
+        throw new TypeError('you must provide an embed color')
     }
 
     client.on('message', async message => {
@@ -92,7 +96,7 @@ module.exports = function discord(token, PREFIX) {
                                     User.kick({ reason: `${Reason || "No Reason Provided!"}` });
                             }, 2000);
                             let embed = new Discord.MessageEmbed()
-                                    .setColor('YELLOW')
+                                    .setColor(Color)
                                     .setTitle(`Member Kicked!`)
                                     .addField(`Moderator`, `${message.author.tag} (${message.author.id})`)
                                     .addField(`Kicked Member`, `${Member.tag} (${Member.id})`)
@@ -184,7 +188,7 @@ module.exports = function discord(token, PREFIX) {
                                 User.ban({ reason: `${Reason || "No Reason Provided!"}` });
                         }, 2000);
                         let embed = new Discord.MessageEmbed()
-                                .setColor('YELLOW')
+                                .setColor(Color)
                                 .setTitle(`Member Banned!`)
                                 .addField(`Moderator`, `${message.author.tag} (${message.author.id})`)
                                 .addField(`Banned Member`, `${Member.tag} (${Member.id})`)
@@ -254,7 +258,7 @@ module.exports = function discord(token, PREFIX) {
     
             message.channel.bulkDelete(args[0]).then(Message => {
                     let embed = new Discord.MessageEmbed()
-                            .setColor('YELLOW')
+                            .setColor(Color)
                             .setTitle(`Messages Deleted!`)
                             .addField(`Moderator`, `${message.author.tag} (${message.author.id})`)
                             .addField(`Channel`, `${message.channel.name} (${message.channel.id})`)
@@ -303,7 +307,7 @@ module.exports = function discord(token, PREFIX) {
         let Reason = args.slice(1).join(" ");
 
         let Embed = new Discord.MessageEmbed()
-                .setColor('YELLOW')
+                .setColor(Color)
                 .setTitle(`Member Muted!`)
                 .addField(`Moderator`, `${message.author.tag} (${message.author.id}`)
                 .addField(`Muted Member`, `${Member.user.tag} (${Member.user.id})`)
@@ -406,7 +410,7 @@ if (command === 'unban') {
     }
 
     let embed = new Discord.MessageEmbed()
-            .setColor('YELLOW')
+            .setColor(Color)
             .setTitle(`Member Unbanned!`)
             .addField(`Moderator`, `${message.author.tag} (${message.author.id}}`)
             .addField(`Unbanned Member`, `${Member.user.tag} (${Member.user.id})`)
@@ -450,7 +454,7 @@ if (command === 'unban') {
     }
 
     let Embed = new Discord.MessageEmbed()
-            .setColor('YELLOW')
+            .setColor(Color)
             .setTitle(`Member Unmuted!`)
             .addField(`Moderator`, `${message.author.tag} (${message.author.id}`)
             .addField(`Unmuted Member`, `${Member.user.tag} (${Member.user.id})`)
@@ -469,7 +473,88 @@ if (command === 'unban') {
             });
     }
 }
+if (command === 'warn') {
+    message.delete();
+    let Duser = message.mentions.users.first()
+    if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send({
+            embed: {
+                    color: 'RED',
+                    description: "You can't use that command!"
+            }
     })
+    if (!Duser) return message.channel.send({
+            embed: {
+                    color: 'RED',
+                    description: "Can't find user!"
+            }
+    })
+    let dMessage = args.join(" ").slice(22);
+    if (dMessage.length < 1) return message.channel.send({
+            embed: {
+                    color: 'RED',
+                    description: 'what is the reason???'
+            }
+    })
+
+    Duser.send({
+            embed: {
+                    color: Color,
+                    description: `${Duser}, You have been warned for doing ${dMessage} in the server ${message.guild.name}`
+            }
+    })
+
+    message.channel.send({
+            embed: {
+                    color: Color,
+                    description: `${Duser} has been warned for doing ${dMessage} :thumbsdown:`
+            }
+    })
+}
+if (command === 'lockdown') {
+    message.delete();
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send({
+        embed:{
+            color:'RED',
+            description:'You don\'t have permission to do this command.'
+        }
+    })
+    if(!message.guild.me.hasPermission('ADMINISTRATOR')) return message.channel.send({
+        embed:{
+            color:'RED',
+            description:'I\'m missing permission to do this command'
+        }
+    })
+    message.channel.updateOverwrite(message.channel.guild.roles.everyone, {  SEND_MESSAGES: false });
+    message.channel.send({
+        embed:{
+            color:Color,
+            description:'🔒 Lockdown lifted 🔒'
+        }
+    })
+}
+if(command === 'release'){
+    message.delete()
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send({
+        embed:{
+            color:'RED',
+            description:'You don\'t have permission to do this command.'
+        }
+    })
+    if(!message.guild.me.hasPermission('ADMINISTRATOR')) return message.channel.send({
+        embed:{
+            color:'RED',
+            description:'I\'m missing permission to do this command'
+        }
+    })
+    message.channel.updateOverwrite(message.channel.guild.roles.everyone, {  SEND_MESSAGES: true });
+    message.channel.send({
+        embed:{
+            color:Color,
+            description:'⚒️ Lockdown Released ⚒️'
+        }
+    })
+}
+})
     if (token === undefined) {
             throw new TypeError('you must provide your bot TOKEN')
     } else {
